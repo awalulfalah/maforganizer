@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAFALAH</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- My style -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Alpine JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- app -->
+    <script src="src/app.js"></script>
+  </head>
+
+  <body>
+    <!-- Navbar Start -->
+    <nav class="navbar" x-data>
+      <a href="#" class="navbar-logo"><span>MAF </span>FURNITURE </a>
+
+      <div class="navbar-nav">
+        <a href="#">home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#product">product</a>
+        <a href="#tugas">tugas STI</a>
+        <a href="#contact">kontak</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-badge"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
+          ></span>
+        </a>
+        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- search form start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="search here...." />
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- search form start -->
+
+      <!-- shopping cart start -->
+      <div class="shopping-cart">
+        
+        
+        <div style="border: 2px solid black; height: 90%; overflow-x: hidden; overflow-y: scroll; width: 100%;">
+          <div style="height: auto;">
+            <template x-for="(item, index) in $store.cart.items" x-key="index">
+              <div class="cart-item">
+                <img :src="`img/products/${item.img}`" :alt="item.name" />
+                <div class="item-detail">
+                  <h3 x-text="item.name"></h3>
+                  <div class="item-price">
+                    <span x-text="rupiah(item.price)"></span> &times;
+                    <button id="remove" @click="$store.cart.remove(item.id)">
+                      &minus;
+                    </button>
+                    <span x-text="item.quantity"></span>
+                    <button id="add" @click="$store.cart.add(item)">&plus;</button>
+                    &equals;
+                    <span x-text="rupiah(item.total)"></span>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <h4 x-show="!$store.cart.items.length">Cart is Empty</h4>
+            <h4 x-show="$store.cart.items.length">
+              Total : <span x-text="rupiah($store.cart.total)"></span>
+            </h4>
+            <div class="form-container" x-show="$store.cart.items.length">
+              <form action="" id="checkoutForm">
+                <h5>Cutomer Detail</h5>
+    
+                <label for="name">
+                  <span>Name</span>
+                  <input type="text" name="name" id="name" />
+                </label>
+    
+                <label for="email">
+                  <span>Email</span>
+                  <input type="email" name="email" id="email" />
+                </label>
+    
+                <label for="phone">
+                  <span>Phone</span>
+                  <input type="number" name="phone" id="phone" autocomplete="off" />
+                </label>
+    
+                <button
+                  class="checkout-button"
+                  type="submit"
+                  id="checkout-button"
+                  value="checkout"
+                  
+                >
+                <a href="https://wa.me/6281326866932">Checkout</a>
+                  
+                  
+                </button>
+              </form>
+            </div>
+          </div>
+        
+      </div>
+      <!-- shopping cart end -->
+    </nav>
+
+    <!-- Navbar End -->
+
+    <!-- Hero Section start -->
+    <section class="hero" id="home">
+      <main class="content">
+        <h1>WE ARE <span>PROFESSIONAL</span></h1>
+        <p>best products and quality</p>
+        <a href="#product" class="cta">Pesan Sekarang</a>
+      </main>
+    </section>
+    <!-- Hero Section end -->
+
+    <!-- scan kartu -->
+    <section id="scan" class="scan">
+      <h2>Kartu Ujian</h2>
+      <img class="img" src="img/kartu-ujian.png" alt="" />
+    </section>
+
+    <!-- About Section start -->
+    <section id="about" class="about">
+      <h2><span>Tentang </span>Kami</h2>
+
+      <div class="content">
+        <p>
+          <b>MAF FURNITURE. </b>
+          Adalah produsen produk-produk indoor furniture minimalis berkualitas
+          serta bernilai seni, dengan material utama kayu premium class. Proses
+          produksi dikerjakan sepenuhnya oleh pengrajin - pengrajin profesional
+          yg mempunyai ketrampilan, kehandalan serta totalitas yang tinggi dalam
+          menghasilkan suatu produk, sehingga menghasilkan kualitas produk
+          furniture / furniture kayu yg setara dengan kualitas export. Kami
+          menawarkan produk furniture berkualitas mulai dari furniture ukir,
+          furniture minimalis, dll. Dengan semakin meningkatnya permintaan pasar
+          akan produk furniture pada pasar lokal. Kami sebagai salah satu
+          perusahaan furniture mengambil inisiatif untuk memperluas jaringan
+          target pasar kami pada domain domestik guna memberikan kepuasan serta
+          kepercayaan kepada para konsumen akan terpenuhinya produk-produk mebe
+          / furniture berkualitas.
+        </p>
+        <p>
+          Kami memberikan jaminan kualitas produk furniture yang ada di Katalog.
+          <b>MAF FURNITURE</b> juga melayani segala macam pesanan furniture
+          untuk perumahan, perkantoran, Apartement, dan hotel. Menyediakan
+          berbagai jenis produk indoor furniture mulai dari set meja makan
+          minimalis atau ukir, set kursi tamu minimalis atau ukir, set sofa ,
+          set tempat tidur minimalis atau ukir, Lemari pakaian minimalis atau
+          ukir , Lemari hias minimalis atau ukir, bufet minimalis atau ukir,
+          gebyok pengantin kayu , bufet tv minimalis atau ukir, meja rias
+          minimalis.
+        </p>
+      </div>
+    </section>
+    <!-- About Section end -->
+
+    <!-- Menu Section start -->
+    <section id="product" class="product">
+      <h2><span>Product </span>Kami</h2>
+
+      <div class="row">
+        <div class="product-card">
+          <img src="img/1.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI MEJA --</h3>
+          <p>IDR 750k</p>
+        </div>
+        <div class="product-card">
+          <img src="img/2.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI MEJA --</h3>
+          <p>IDR 750k</p>
+        </div>
+        <div class="product-card">
+          <img src="img/3.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI MEJA --</h3>
+          <p>IDR 750k</p>
+        </div>
+        <div class="product-card">
+          <img src="img/4.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI MEJA --</h3>
+          <p>IDR 750k</p>
+        </div>
+        <div class="product-card">
+          <img src="img/5.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI --</h3>
+          <p>IDR 500k</p>
+        </div>
+        <div class="product-card">
+          <img src="img/6.jpg" alt="kursi" style="width: 300px" />
+          <h3>-- KURSI --</h3>
+          <p>IDR 250k</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section Start -->
+    <section class="products" id="products" x-data="products">
+      <h2><span>PRODUK</span> KAMI</h2>
+
+      <div class="row">
+        <template x-for="(item, index) in items" x-key="index">
+          <div class="product-card">
+            <div class="product-image">
+              <img :src="`img/products/${item.img}`" :alt="item.name" />
+            </div>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div class="product-star">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-star"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"
+                  />
+                </svg>
+              </div>
+              <div class="product-price">
+                <span x-text="rupiah(item.price)"></span>
+              </div>
+            </div>
+            <div class="product-icon">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  class="bi bi-cart"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                  />
+                </svg>
+                <span>add to cart</span>
+              </a>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- Menu Section end -->
+
+    <!-- Tugas STI star -->
+    <section id="tugas" class="tugas">
+      <h2>Tugas STI</h2>
+
+      <div class="row">
+        <div class="tgs">
+          <h3>PERTEMUAN 1</h3>
+          <a href="TUGAS STI/pertemuan-1/materi.ppt" class="button">MATERI</a>
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 2</h3>
+          <a href="TUGAS STI/pertemuan-2/materi.ppt" class="button">MATERI</a>
+          <a href="TUGAS STI/pertemuan-2/latihan.pptx" class="button"
+            >SOAL LATIHAN</a
+          >
+          <a href="TUGAS STI/pertemuan-2/tugas.docx" class="button">TUGAS</a>
+          <a href="https://www.youtube.com/watch?v=H4absOMmAtc" class="button"
+            >LINK YOUTUBE</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 3</h3>
+          <a href="TUGAS STI/pertemuan-3/materi.ppt" class="button">MATERI</a>
+          <a href="TUGAS STI/pertemuan-3/soal latihan.pptx" class="button"
+            >SOAL LATIHAN</a
+          >
+          <a href="TUGAS STI/pertemuan-3/TUGAS 3.docx" class="button">TUGAS</a>
+        </div>
+
+        <div class="tgs">
+          <h3>PERTEMUAN 4</h3>
+          <a href="https://www.youtube.com/watch?v=TZwhoPJLTc0" class="button"
+            >LINK YOUTUBE</a
+          >
+          <a
+            href="TUGAS STI/pertemuan-4/MATERI KE-4 10 jari (1).docx"
+            class="button"
+            >MATERI</a
+          >
+          <a href="TUGAS STI/pertemuan-4/tugas mengetik.docx" class="button"
+            >TUGAS</a
+          >
+          <a href="TUGAS STI/pertemuan-4/SURAT KARTINI.docx" class="button"
+            >SURAT KARTINI</a
+          >
+        </div>
+
+        <div class="tgs">
+          <h3>PERTEMUAN 5</h3>
+          <a href="https://www.youtube.com/watch?v=RwDUzDmWDrM" class="button"
+            >LINK YOUTUBE</a
+          >
+          <a href="TUGAS STI/pertemuan-5/MATERI EXEL (1).pptx" class="button"
+            >MATERI</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 6</h3>
+          <a href="https://www.youtube.com/watch?v=eR3lAyLEkJI" class="button"
+            >MATERI</a
+          >
+          <a
+            href="TUGAS STI/pertemuan-6/SOAL EXEL 2023 (1) (1).pptx"
+            class="button"
+            >SOAL</a
+          >
+          <a href="TUGAS STI/pertemuan-6/TUGAS EXCEL.xlsx" class="button"
+            >TUGAS</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 7</h3>
+          <a href="https://www.youtube.com/watch?v=MCVkMmYL-aY" class="button"
+            >LINK YOUTUBE</a
+          >
+        </div>
+
+        <div class="tgs">
+          <h3>EVALUASI TENGAH SEMESTER</h3>
+          <a
+            href="TUGAS STI/pertemuan-8/UTS_STI_DB_2023 (4).docx"
+            class="button"
+            >SOAL UTS</a
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="tgs">
+          <h3>PERTEMUAN 8</h3>
+          <a href="TUGAS STI/pertemuan-2/materi.ppt" class="button">MATERI</a>
+          <a href="TUGAS STI/pertemuan-2/latihan.pptx" class="button"
+            >SOAL LATIHAN</a
+          >
+          <a href="TUGAS STI/pertemuan-2/tugas.docx" class="button">TUGAS</a>
+          <a href="https://www.youtube.com/watch?v=H4absOMmAtc" class="button"
+            >LINK YOUTUBE</a
+          >
+        </div>
+
+        <div class="tgs">
+          <h3>PERTEMUAN 9</h3>
+          <a href="https://www.youtube.com/watch?v=W_h7z42GQ08" class="button"
+            >LINK YOUTUBE 1</a
+          >
+          <a href="https://www.youtube.com/watch?v=MIg5XPve7Fs" class="button"
+            >LINK YOUTUBE 2</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 10</h3>
+          <a
+            href="https://qwords.com/blog/cara-membuat-wordpress-untuk-pemula/"
+            class="button"
+            >MATERI</a
+          >
+          <a href="https://maforganizer.wordpress.com/" class="button"
+            >LINK TUGAS</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 11</h3>
+          <a
+            href="https://id.freepikcompany.com/v2/log-in?client_id=wepik&lang=en"
+            class="button"
+            >LINK MATERI</a
+          >
+          <a href="https://www.youtube.com/watch?v=MIg5XPve7Fs" class="button"
+            >LINK YOUTUBE 2</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 12</h3>
+          <a
+            href="https://www.dewaweb.com/blog/contoh-database-terpopuler/#2_MySQL"
+            class="button"
+            >LINK MATERI</a
+          >
+          <a href="TUGAS STI/pertemuan-12/SEWA CD (2).docx" class="button"
+            >CONTOH</a
+          >
+          <a href="TUGAS STI/pertemuan-12/FALAH.xlsx" class="button">TUGAS</a>
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 13</h3>
+          <a href="TUGAS STI/pertemuan-13/SIMRS-1 (2).ppt" class="button"
+            >MATERI</a
+          >
+          <a href="TUGAS STI/pertemuan-13/MAKALAH STI.docx" class="button"
+            >TUGAS</a
+          >
+        </div>
+        <div class="tgs">
+          <h3>PERTEMUAN 14</h3>
+          <a
+            href="https://www.slideshare.net/rakhkha/komunikasi-dan-jaringan-komputer-125422189"
+            class="button"
+            >LINK MATERI</a
+          >
+          <a href="TUGAS STI/pertemuan-14/TOPOLOI STI FALAH.docx" class="button"
+            >TUGAS</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- Tugas STI end -->
+
+    <!-- Kontak Section start -->
+    <section id="contact" class="contact">
+      <h2>Kontak Kami</h2>
+
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253630.5440708543!2d110.48877672755224!3d-6.649741294309282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70df6172aa5a71%3A0x4027a76e352f440!2sKec.%20Batealit%2C%20Kabupaten%20Jepara%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1698947570071!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
+
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="Nama" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" placeholder="Email" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="text" placeholder="No HP" />
+          </div>
+          <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+      </div>
+    </section>
+    <!-- Kontak Section end -->
+
+    <!-- footer start -->
+    <footer>
+      <div class="socials">
+        <a href="https://www.instagram.com/pecytetfalah/"
+          ><i data-feather="instagram"></i
+        ></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="https://web.facebook.com/falah.pecytet"
+          ><i data-feather="facebook"></i
+        ></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#product">Product</a>
+        <a href="#tugas">Tugas STI</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="credit">
+        <p>Created by <a href="">MUHAMMAD AWALUL FALAH</a>. | &copy; 2023.</p>
+      </div>
+    </footer>
+    <!-- footer end -->
+
+    <!-- Modal Box Item Detail start -->
+    <div class="modal" id="item-detail-modal">
+      <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+          <img src="img/11.jpg" alt="product 1" />
+          <div class="product-content">
+            <h3>product 1</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+              minus magnam quos harum nostrum nemo nisi dolorem nesciunt veniam
+              eius.
+            </p>
+            <div class="product-star">
+              <i data-feather="star"></i>
+              <i data-feather="star"></i>
+              <i data-feather="star"></i>
+              <i data-feather="star"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price">IDR 330k <span>IDR 350k</span></div>
+            <div class="kotak">
+              <a href="#"
+                ><i data-feather="shopping-cart"></i><span>add to cart</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Box Item Detail start -->
+
+    <!-- feather icons -->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- My Javasript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
